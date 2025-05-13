@@ -1,44 +1,44 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class RemoveDuplicate {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
-        // Input size of array
+        // Get array size from user
         System.out.print("Enter number of elements: ");
-        int n = sc.nextInt();
-
-        int[] arr = new int[n];
+        int n = scanner.nextInt();
 
         // Input array elements
+        int[] arr = new int[n];
         System.out.println("Enter " + n + " elements:");
         for (int i = 0; i < n; i++) {
-            arr[i] = sc.nextInt();
+            arr[i] = scanner.nextInt();
         }
 
-        // Remove duplicates
+        // Sort the array
+        Arrays.sort(arr);
+
+        // Temporary array to store unique elements
         int[] temp = new int[n];
         int newSize = 0;
 
-        for (int i = 0; i < n; i++) {
-            boolean isDuplicate = false;
-            for (int j = 0; j < newSize; j++) {
-                if (arr[i] == temp[j]) {
-                    isDuplicate = true;
-                    break;
-                }
-            }
-            if (!isDuplicate) {
+        // Store first element
+        temp[newSize++] = arr[0];
+
+        // Compare each element with the previous one
+        for (int i = 1; i < n; i++) {
+            if (arr[i] != arr[i - 1]) {
                 temp[newSize++] = arr[i];
             }
         }
 
         // Print result
-        System.out.print("Array after removing duplicates: ");
+        System.out.println("Sorted array without duplicates:");
         for (int i = 0; i < newSize; i++) {
             System.out.print(temp[i] + " ");
         }
 
-        sc.close();
+        scanner.close();
     }
 }
